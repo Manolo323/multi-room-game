@@ -28,14 +28,16 @@ class Player {
     }
 
     update() {
+        // implements how player should move in reaction to x velocity
+        this.position.x += this.velocity.x
         //adds to current y position to each frame
         this.position.y += this.velocity.y
+        this.sides.bottom = this.position.y + this.height
 
         // above bottom of canvas
         // sets the player to bottom of canvas
         if (this.sides.bottom + this.velocity.y < canvas.height) {
             this.velocity.y += this.gravity
-            this.sides.bottom = this.position.y + this.height
         } else this.velocity.y = 0
     }
 }

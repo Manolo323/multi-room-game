@@ -8,8 +8,20 @@ canvas.width = 64 * 16 //1024
 canvas.height = 64 * 9 //576
 
 const player = new Player()
-//gives us the bottom of the player
-// let bottom = y + 100
+
+// properties for event listener key that is pressed
+const keys = {
+    w: {
+        pressed: false
+    },
+    a: {
+        pressed: false,
+    },
+    d: {
+        pressed: false,
+    },
+}
+
 //animation loop
 function animate() {
     window.requestAnimationFrame(animate)
@@ -18,9 +30,14 @@ function animate() {
     //clears the canvas from previous frames of animation
     context.fillRect(0, 0, canvas.width, canvas.height)
 
+    //sets player velocity to 0 to have player stay
+    player.velocity.x = 0
+    // moves to the right
+    if (keys.d.pressed) player.velocity.x = 5
+        // moves to the left
+    else if (keys.a.pressed) player.velocity.x = -5
     player.draw()
     player.update()
 }
 
 animate()
-
