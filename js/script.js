@@ -7,6 +7,14 @@ const context = canvas.getContext('2d')
 canvas.width = 64 * 16 //1024
 canvas.height = 64 * 9 //576
 
+// adds background for our game
+class Sprite {
+    constructor({position}) {
+        this.position = position
+        this.image = new Image()
+        this.image.src = '../img/backgroundLevel1.png'
+    }
+}
 const player = new Player()
 
 // properties for event listener key that is pressed

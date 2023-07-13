@@ -1,7 +1,7 @@
 1. Project Setup √
 2. Create A Player √
 3. Gravity √
-4. Player Movement
+4. Player Movement √
 5. Background Sprite
 6. Collision Blocks
 7. Sprite Animation
