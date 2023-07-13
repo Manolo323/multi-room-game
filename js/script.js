@@ -7,6 +7,9 @@ const context = canvas.getContext('2d')
 canvas.width = 64 * 16 //1024
 canvas.height = 64 * 9 //576
 
+const parsedCollisions = collisionsLevel1.parse2d()
+const collisionBlocks = parsedCollisions.createObjectsFrom2D()
+
 //renders background image to screen
 const backgroundLevel1 = new Sprite ({
     position: {
@@ -37,6 +40,10 @@ function animate() {
 
     //sets background image to the canvas
     backgroundLevel1.draw()
+    // sets collision blocks to the level 1 map
+    collisionBlocks.forEach(collisionBlock => {
+        collisionBlock.draw()
+    })
 
     //sets player velocity to 0 to have player stay
     player.velocity.x = 0
