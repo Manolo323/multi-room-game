@@ -1,6 +1,6 @@
-1. Project Setup
-2. Create A Player
-3. Gravity
+1. Project Setup √
+2. Create A Player √
+3. Gravity √
 4. Player Movement
 5. Background Sprite
 6. Collision Blocks
