@@ -7,14 +7,15 @@ const context = canvas.getContext('2d')
 canvas.width = 64 * 16 //1024
 canvas.height = 64 * 9 //576
 
-// adds background for our game
-class Sprite {
-    constructor({position}) {
-        this.position = position
-        this.image = new Image()
-        this.image.src = '../img/backgroundLevel1.png'
-    }
-}
+//renders background image to screen
+const backgroundLevel1 = new Sprite ({
+    position: {
+        x: 0,
+        y: 0,
+    },
+    imageSrc:  'img/backgroundLevel1.png',
+})
+
 const player = new Player()
 
 // properties for event listener key that is pressed
@@ -33,10 +34,9 @@ const keys = {
 //animation loop
 function animate() {
     window.requestAnimationFrame(animate)
-    //draws a rectangle
-    context.fillStyle = 'white'
-    //clears the canvas from previous frames of animation
-    context.fillRect(0, 0, canvas.width, canvas.height)
+
+    //sets background image to the canvas
+    backgroundLevel1.draw()
 
     //sets player velocity to 0 to have player stay
     player.velocity.x = 0
