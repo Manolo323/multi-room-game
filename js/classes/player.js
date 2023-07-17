@@ -5,8 +5,8 @@ class Player {
         collisionBlocks = []
                 }) {
         this.position  =  {
-            x: 100,
-            y: 100
+            x: 200,
+            y: 200
         }
 
         //sets gravity
@@ -15,8 +15,8 @@ class Player {
             y: 0,
         }
 
-        this.width = 100
-        this.height = 100
+        this.width = 25
+        this.height = 25
         this.sides = {
             bottom: this.position.y + this.height
         }
@@ -34,35 +34,62 @@ class Player {
     update() {
         // implements how player should move in reaction to x velocity
         this.position.x += this.velocity.x
-        // check for horizontal collisions
+
+        this.checkForHorizontalCollisions()
+        this.applyGravity()
+        this.checkForVerticalCollision()
+    }
+    checkForHorizontalCollisions() {
         for (let i = 0; i < this.collisionBlocks.length; i++) {
             const collisionBlock = this.collisionBlocks[i]
             // if a collision exists
             if (
                 this.position.x <= collisionBlock.position.x + collisionBlock.width &&
                 this.position.x + this.width >= collisionBlock.position.x &&
-                this.position.y + this.height >=  collisionBlock.position.x &&
+                this.position.y + this.height >=  collisionBlock.position.y &&
                 this.position.y <= collisionBlock.position.y + collisionBlock.height
             ) {
-                // collision on x axis goig to the left
-                if (this.velocity.x < -1) {
+                // collision on x-axis going to the left
+                if (this.velocity.x < 0) {
                     this.position.x = collisionBlock.position.x + collisionBlock.width + 0.01
                     break
                 }
-                if (this.velocity.x < 1) {
+                // collision on x-axis going to the right
+                if (this.velocity.x > 0) {
                     this.position.x = collisionBlock.position.x - this.width - 0.01
                     break
                 }
             }
         }
-        //adds to current y position to each frame
-        this.position.y += this.velocity.y
-        this.sides.bottom = this.position.y + this.height
+    }
 
-        // above bottom of canvas
-        // sets the player to bottom of canvas
-        if (this.sides.bottom + this.velocity.y < canvas.height) {
-            this.velocity.y += this.gravity
-        } else this.velocity.y = 0
+    applyGravity() {
+        this.velocity.y += this.gravity
+        this.position.y += this.velocity.y
+    }
+    checkForVerticalCollision() {
+        for (let i = 0; i < this.collisionBlocks.length; i++) {
+            const collisionBlock = this.collisionBlocks[i]
+            // if a collision exists
+            if (
+                this.position.x <= collisionBlock.position.x + collisionBlock.width &&
+                this.position.x + this.width >= collisionBlock.position.x &&
+                this.position.y + this.height >=  collisionBlock.position.y &&
+                this.position.y <= collisionBlock.position.y + collisionBlock.height
+            ) {
+                // collision on y-axis going to the left
+                if (this.velocity.y < 0) {
+                    this.velocity.y = 0
+                    this.position.y = collisionBlock.position.y + collisionBlock.height + 0.01
+                    break
+                }
+                // collision on x-axis going to the right
+                if (this.velocity.y > 0) {
+                    this.velocity.y = 0
+                    this.position.y = collisionBlock.position.y - this.height - 0.01
+                    break
+                }
+            }
+        }
     }
 }

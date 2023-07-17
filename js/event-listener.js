@@ -4,7 +4,7 @@ window.addEventListener('keydown', (event) => {
         case 'w':
             // only allows player to jump once
             if (player.velocity.y === 0)
-                player.velocity.y = -20
+                player.velocity.y = -25
             break
         case 'a':
             // moves player to the left

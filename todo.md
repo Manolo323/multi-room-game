@@ -4,9 +4,10 @@
 4. Player Movement √
 5. Background Sprite √
 6. Collision Blocks √
-7. Sprite Animation
-8. HitBox Implementation
-9. Sprite Swapping
-10. Entering Doors
-11. Change Levels
-12. Next Steps
+7. Collision Detections √
+8. Sprite Animation
+9. HitBox Implementation
+10. Sprite Swapping
+11. Entering Doors
+12. Change Levels
+13. Next Steps
