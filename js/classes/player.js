@@ -1,12 +1,11 @@
 //creates a player with individual properties
-class Player {
+class Player extends Sprite {
     //sets properties associated with player we create
-    constructor({
-        collisionBlocks = []
-                }) {
+    constructor({ collisionBlocks = [], imageSrc, frameRate }) {
+        super({ imageSrc, frameRate })
         this.position  =  {
             x: 200,
-            y: 200
+            y: 200,
         }
 
         //sets gravity
@@ -15,8 +14,6 @@ class Player {
             y: 0,
         }
 
-        this.width = 25
-        this.height = 25
         this.sides = {
             bottom: this.position.y + this.height
         }
@@ -24,14 +21,12 @@ class Player {
 
         this.collisionBlocks = collisionBlocks
     }
-    //defines what a player looks like
-    draw() {
-        //adds a rectangle player
-        context.fillStyle = 'red'
-        context.fillRect(this.position.x, this.position.y, this.width, this.height)
-    }
 
     update() {
+        // this is the blue box
+        // context.fillStyle = 'rgba(0, 0, 255, 0.5)'
+        // context.fillRect(this.position.x, this.position.y, this.width, this.height)
+
         // implements how player should move in reaction to x velocity
         this.position.x += this.velocity.x
 

@@ -5,7 +5,7 @@
 5. Background Sprite √
 6. Collision Blocks √
 7. Collision Detections √
-8. Sprite Animation
+8. Sprite Animation √
 9. HitBox Implementation
 10. Sprite Swapping
 11. Entering Doors
