@@ -1,6 +1,6 @@
 // adds background for our game
 class Sprite {
-    constructor({ position, imageSrc, frameRate = 1, animations }) {
+    constructor({ position, imageSrc, frameRate = 1, animations, frameBuffer = 2, loop = true, autoplay = true }) {
         this.position = position
         this.image = new Image()
         this.image.onload = () => {
@@ -15,8 +15,10 @@ class Sprite {
         this.frameRate = frameRate
         this.currentFrame = 0
         this.elapsedFrames = 0
-        this.frameBuffer = 2
+        this.frameBuffer = frameBuffer
         this.animations = animations
+        this.loop = loop
+        this.autoplay = autoplay
         // creates a new image object associated with each sprite
         if (this.animations) {
             for (let key in this.animations) {
@@ -51,14 +53,19 @@ class Sprite {
 
         this.updateFrames()
     }
+    // ability to play door animation when ready
+    play() {
+        this.autoplay = true
+    }
     // increases this.currentFrame
     updateFrames() {
+        if (!this.autoplay) return
         this.elapsedFrames++
 
         if (this.elapsedFrames % this.frameBuffer === 0) {
             // adds 1 to the current frame and then starts frame from the beginning
             if (this.currentFrame < this.frameRate - 1) this.currentFrame++
-            else this.currentFrame = 0
+            else if (this.loop) this.currentFrame = 0
         }
     }
 }
