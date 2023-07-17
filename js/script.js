@@ -22,7 +22,34 @@ const backgroundLevel1 = new Sprite ({
 const player = new Player({
     collisionBlocks,
     imageSrc: './img/king/idle.png',
-    frameRate: 11
+    frameRate: 11,
+    // sprite swapping
+    animations: {
+        idleRight: {
+            frameRate: 11,
+            frameBuffer: 2,
+            loop: true,
+            imageSrc: './img/king/idle.png',
+        },
+        idleLeft: {
+            frameRate: 11,
+            frameBuffer: 2,
+            loop: true,
+            imageSrc: './img/king/idleLeft.png',
+        },
+        runRight: {
+            frameRate: 8,
+            frameBuffer: 4,
+            loop: true,
+            imageSrc: './img/king/runRight.png',
+        },
+        runLeft: {
+            frameRate: 8,
+            frameBuffer: 4,
+            loop: true,
+            imageSrc: './img/king/runLeft.png',
+        }
+    }
 })
 
 // properties for event listener key that is pressed
@@ -52,9 +79,20 @@ function animate() {
     //sets player velocity to 0 to have player stay
     player.velocity.x = 0
     // moves to the right
-    if (keys.d.pressed) player.velocity.x = 5
-        // moves to the left
-    else if (keys.a.pressed) player.velocity.x = -5
+    if (keys.d.pressed) {
+        player.switchSprite('runRight')
+        player.velocity.x = 5
+        player.lastDirection = 'right'
+    } // moves to the left
+    else if (keys.a.pressed) {
+        player.switchSprite('runLeft')
+        player.velocity.x = -5
+        player.lastDirection = 'left'
+    } else {
+        if (player.lastDirection === 'left') player.switchSprite('idleLeft')
+        else player.switchSprite('idleRight')
+    }
+
     player.draw()
     player.update()
 }
