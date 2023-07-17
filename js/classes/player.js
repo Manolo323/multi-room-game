@@ -1,7 +1,9 @@
 //creates a player with individual properties
 class Player {
     //sets properties associated with player we create
-    constructor() {
+    constructor({
+        collisionBlocks = []
+                }) {
         this.position  =  {
             x: 100,
             y: 100
@@ -19,6 +21,8 @@ class Player {
             bottom: this.position.y + this.height
         }
         this.gravity = 1
+
+        this.collisionBlocks = collisionBlocks
     }
     //defines what a player looks like
     draw() {
@@ -30,6 +34,27 @@ class Player {
     update() {
         // implements how player should move in reaction to x velocity
         this.position.x += this.velocity.x
+        // check for horizontal collisions
+        for (let i = 0; i < this.collisionBlocks.length; i++) {
+            const collisionBlock = this.collisionBlocks[i]
+            // if a collision exists
+            if (
+                this.position.x <= collisionBlock.position.x + collisionBlock.width &&
+                this.position.x + this.width >= collisionBlock.position.x &&
+                this.position.y + this.height >=  collisionBlock.position.x &&
+                this.position.y <= collisionBlock.position.y + collisionBlock.height
+            ) {
+                // collision on x axis goig to the left
+                if (this.velocity.x < -1) {
+                    this.position.x = collisionBlock.position.x + collisionBlock.width + 0.01
+                    break
+                }
+                if (this.velocity.x < 1) {
+                    this.position.x = collisionBlock.position.x - this.width - 0.01
+                    break
+                }
+            }
+        }
         //adds to current y position to each frame
         this.position.y += this.velocity.y
         this.sides.bottom = this.position.y + this.height
