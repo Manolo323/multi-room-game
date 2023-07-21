@@ -8,6 +8,6 @@
 8. Sprite Animation √
 9. HitBox Implementation √
 10. Sprite Swapping √
-11. Entering Doors
+11. Entering Doors √
 12. Change Levels
 13. Next Steps

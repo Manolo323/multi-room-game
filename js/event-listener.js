@@ -17,6 +17,7 @@ window.addEventListener('keydown', (event) => {
                     // player will not move around once player collides with door
                     player.preventInput = true
                     player.switchSprite('enterDoor')
+                    door.play()
                     return
                 }
             }

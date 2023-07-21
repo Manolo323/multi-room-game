@@ -1,6 +1,14 @@
 // adds background for our game
 class Sprite {
-    constructor({ position, imageSrc, frameRate = 1, animations, frameBuffer = 2, loop = true, autoplay = true }) {
+    constructor({
+                    position,
+                    imageSrc,
+                    frameRate = 1,
+                    animations,
+                    frameBuffer = 2,
+                    loop = true,
+                    autoplay = true
+    }) {
         this.position = position
         this.image = new Image()
         this.image.onload = () => {
@@ -19,6 +27,7 @@ class Sprite {
         this.animations = animations
         this.loop = loop
         this.autoplay = autoplay
+        this.currentAnimation = null
         // creates a new image object associated with each sprite
         if (this.animations) {
             for (let key in this.animations) {
@@ -66,6 +75,12 @@ class Sprite {
             // adds 1 to the current frame and then starts frame from the beginning
             if (this.currentFrame < this.frameRate - 1) this.currentFrame++
             else if (this.loop) this.currentFrame = 0
+        }
+        if (this.currentAnimation?.onComplete) {
+            if (this.currentFrame === this.frameRate - 1 && !this.currentAnimation.isActive) {
+            this.currentAnimation.onComplete()
+                this.currentAnimation.isActive = true
+            }
         }
     }
 }
